@@ -39,7 +39,7 @@ def build(app: flask.Flask) -> None:
             pass
 
 
-def build_page(path: str) -> str:
+def build_page(path: str, **kwargs) -> str:
     """
     Build a page from the content at the given path.
 
@@ -54,17 +54,18 @@ def build_page(path: str) -> str:
     """
     if path == "/":
         path = ""
-    page = PATHS.get(f"/{path}")
+    page: Union[Page, None] = PATHS.get(f"/{path}")
 
     if page is None:
         flask.abort(404)
 
     return flask.render_template(
         f"{page.frontmatter.get('template', 'default')}.html",
-        content=page.render_content(),
+        content=page.render_content(**kwargs),
         page=page.frontmatter,
         **_get_files(),
         **get_config(),
+        **kwargs,
     )
 
 

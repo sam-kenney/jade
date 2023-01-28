@@ -5,7 +5,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 __name__ = "jade-md"
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 __description__ = "Jade - A Python library for rendering markdown to HTML for Flask."
 
 here = pathlib.Path(__file__).parent.resolve()
